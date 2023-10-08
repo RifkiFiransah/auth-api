@@ -1,7 +1,7 @@
 name: Continuous Integration
 
 on: 
-  pull request:
+  pull_request:
     branches:
       - master
 
@@ -11,15 +11,15 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14-x]
+        node-version: [14.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        node-version; ${{ matrix.node-version }}
+        node-version: ${{ matrix.node-version }}
     - name: npm install migrate and test
       run: |
         npm install
@@ -27,15 +27,15 @@ jobs:
         npm run test
       env:
         CI: true
-        PGHOST_TEST: ${{ secret.PGHOST_TEST }}
-        PGUSER_TEST: ${{ secret.PGUSER_TEST }}
-        PGDATABASE_TEST: ${{ secret.PGDATABASE_TEST }}
-        PGPASSWORD_TEST: ${{ secret.PGPASSWORD_TEST }}
-        PGPORT_TEST: ${{ secret.PGPORT_TEST }}
-        PGHOST: ${{ secret.PGHOST_TEST }}
-        PGUSER: ${{ secret.PGUSER_TEST }}
-        PGDATABASE: ${{ secret.PGDATABASE_TEST }}
-        PGPASSWORD: ${{ secret.PGPASSWORD_TEST }}
-        PGPORT: ${{ secret.PGPORT_TEST }}
+        PGHOST_TEST: ${{ secrets.PGHOST_TEST }}
+        PGUSER_TEST: ${{ secrets.PGUSER_TEST }}
+        PGDATABASE_TEST: ${{ secrets.PGDATABASE_TEST }}
+        PGPASSWORD_TEST: ${{ secrets.PGPASSWORD_TEST }}
+        PGPORT_TEST: ${{ secrets.PGPORT_TEST }}
+        PGHOST: ${{ secrets.PGHOST_TEST }}
+        PGUSER: ${{ secrets.PGUSER_TEST }}
+        PGDATABASE: ${{ secrets.PGDATABASE_TEST }}
+        PGPASSWORD: ${{ secrets.PGPASSWORD_TEST }}
+        PGPORT: ${{ secrets.PGPORT_TEST }}
         ACCESS_TOKEN_KEY: ${{ secrets.ACCESS_TOKEN_KEY }}
         REFRESH_TOKEN_KEY: ${{ secrets.REFRESH_TOKEN_KEY }}
