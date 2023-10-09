@@ -214,4 +214,22 @@ describe("HTTP Server", () => {
       expect(responseJson.value).toEqual('Hello world!');
     });
   });
+
+  describe('when GET /{name}', () => {
+    it('should return 200 and my name is {name}', async () => {
+      // Arrange
+      const name = 'RifkiFiransah';
+      const server = await createServer({});
+      // Action
+      const response = await server.inject({
+        method: 'GET',
+        url: `/name/${name}`
+      })
+      // Assert
+      const responseJson = JSON.parse(response.payload);
+      expect(response.statusCode).toEqual(200)
+      expect(responseJson.status).toEqual('success')
+      expect(responseJson.data.name).toEqual(name)
+    })
+  })
 });
