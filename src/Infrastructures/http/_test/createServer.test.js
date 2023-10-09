@@ -223,7 +223,7 @@ describe("HTTP Server", () => {
       // Action
       const response = await server.inject({
         method: 'GET',
-        url: `/${name}`
+        url: `/name/${name}`
       })
       // Assert
       const responseJson = JSON.parse(response.payload);
